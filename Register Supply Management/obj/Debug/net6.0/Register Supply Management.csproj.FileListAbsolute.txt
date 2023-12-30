@@ -1,0 +1,79 @@
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\appsettings.Development.json
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\appsettings.json
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Register Supply Management.exe
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Register Supply Management.deps.json
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Register Supply Management.runtimeconfig.json
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Register Supply Management.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Register Supply Management.pdb
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\BCrypt.Net-Next.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\FluentValidation.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Google.Protobuf.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Humanizer.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\K4os.Compression.LZ4.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\K4os.Compression.LZ4.Streams.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\K4os.Hash.xxHash.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\MySql.Data.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\MySql.EntityFrameworkCore.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.Drawing.Common.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.IO.Pipelines.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.Text.Json.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\System.Windows.Extensions.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\ZstdSharp.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\win-x64\native\comerr64.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\win-x64\native\gssapi64.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\win-x64\native\k5sprt64.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\win-x64\native\krb5_64.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\win-x64\native\krbcc64.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.csproj.AssemblyReference.cache
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.GeneratedMSBuildEditorConfig.editorconfig
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.AssemblyInfoInputs.cache
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.AssemblyInfo.cs
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.csproj.CoreCompileInputs.cache
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.MvcApplicationPartsAssemblyInfo.cs
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.MvcApplicationPartsAssemblyInfo.cache
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\staticwebassets\msbuild.Register Supply Management.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\staticwebassets\msbuild.build.Register Supply Management.props
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Register Supply Management.props
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Register Supply Management.props
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\staticwebassets.pack.json
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\staticwebassets.build.json
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\staticwebassets.development.json
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\scopedcss\bundle\Register Supply Management.styles.css
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.csproj.CopyComplete
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\refint\Register Supply Management.dll
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.pdb
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\Register Supply Management.genruntimeconfig.cache
+D:\Pekerjaan\Kerja\Register Supply Management\Register Supply Management\obj\Debug\net6.0\ref\Register Supply Management.dll
