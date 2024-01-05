@@ -1,4 +1,6 @@
-﻿using Register_Supply_Management.Contracts.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
+using Register_Supply_Management.Contracts.Data;
 using Register_Supply_Management.Data;
 using Register_Supply_Management.Dtos.Vendor;
 using Register_Supply_Management.Model.Data;
@@ -164,6 +166,40 @@ namespace Register_Supply_Management.Services
             {
                 return 2;
             }
+        }
+
+        public FileResult Photo(int id)
+        {
+            var vendor = _vendorRepository.GetById(id);
+
+            var filepath = "";
+
+            if (vendor is null)
+            {
+                return null;
+            }
+
+            if (vendor.Image is null)
+            {
+                filepath = Path.Combine(Directory.GetCurrentDirectory(), "Images", "user.png");
+            }
+            else
+            {
+                filepath = Path.Combine(Directory.GetCurrentDirectory(), "Images", vendor.Image);
+                if (!File.Exists(filepath))
+                {
+                    filepath = Path.Combine(Directory.GetCurrentDirectory(), "Images", "user.png");
+                }
+            }
+
+            var provider = new FileExtensionContentTypeProvider();
+            if (!provider.TryGetContentType(filepath, out var contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+            var bytes = System.IO.File.ReadAllBytes(filepath);
+
+            return new FileContentResult(bytes, contentType);
         }
     }
 }

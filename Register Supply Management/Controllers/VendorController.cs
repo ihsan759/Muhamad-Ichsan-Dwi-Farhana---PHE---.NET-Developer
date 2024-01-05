@@ -181,5 +181,21 @@ namespace Register_Supply_Management.Controllers
                 });
             }
         }
+
+        [HttpGet("Photo/{id}")]
+        public IActionResult GetPhoto(int id)
+        {
+            var fileResult = _vendorService.Photo(id);
+            if (fileResult == null)
+            {
+                return NotFound(new ResponseHandlers<string>
+                {
+                    Code = StatusCodes.Status404NotFound,
+                    Status = HttpStatusCode.NotFound.ToString(),
+                    Message = "Data Not Found"
+                });
+            }
+            return fileResult;
+        }
     }
 }
