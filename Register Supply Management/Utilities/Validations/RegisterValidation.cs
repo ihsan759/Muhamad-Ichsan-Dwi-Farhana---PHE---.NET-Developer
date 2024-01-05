@@ -7,11 +7,17 @@ namespace Register_Supply_Management.Utilities.Validations
     public class RegisterValidation : AbstractValidator<RegisterDto>
     {
         private readonly IAccountRepository _accountRepository;
+        private readonly IVendorRepository _vendorRepository;
 
-        public RegisterValidation(IAccountRepository accountRepository)
+        public RegisterValidation(IAccountRepository accountRepository, IVendorRepository vendorRepository)
         {
 
             _accountRepository = accountRepository;
+            _vendorRepository = vendorRepository;
+
+            RuleFor(p => p.Username)
+                .NotEmpty()
+                .Must(BeUniqueUsername).WithMessage("'Username' already registered");
 
             RuleFor(p => p.Email)
                 .NotEmpty()
@@ -19,6 +25,9 @@ namespace Register_Supply_Management.Utilities.Validations
                 .EmailAddress();
 
             RuleFor(p => p.Name)
+                .NotEmpty();
+
+            RuleFor(p => p.NameVendor)
                 .NotEmpty();
 
             RuleFor(p => p.Password)
@@ -38,28 +47,42 @@ namespace Register_Supply_Management.Utilities.Validations
                 .Must(BeUniqueProperty).WithMessage("'Phone Number' already registered");
 
             RuleFor(p => p.Image)
-                .NotNull().WithMessage("Image is required.")
-                .DependentRules(() =>
-                {
-                    RuleFor(p => p.Image.Name)
-                        .NotEmpty();
-
-                    RuleFor(p => p.Image.ContentType)
-                        .NotEmpty()
-                        .Must(p => p.Equals("image/jpeg") || p.Equals("image/jpg") || p.Equals("image/png"))
-                        .WithMessage("Invalid Image ContentType. Allowed types are JPEG, JPG, and PNG.");
-
-                    RuleFor(p => p.Image.Length)
-                        .NotNull()
-                        .Must(length => length <= 2 * 1024 * 1024)
-                        .WithMessage("Image size must be less than or equal to 10 MB.");
-                });
+                .NotNull()
+                .Must(ValidateImage).WithMessage("Invalid photo extension. Only JPG and JPEG files are allowed.");
 
         }
 
         private bool BeUniqueProperty(string property)
         {
-            return !_accountRepository.IsDuplicateValue(property);
+            return !_vendorRepository.IsDuplicateValue(property);
+        }
+
+        private bool BeUniqueUsername(string username)
+        {
+            var unique = _accountRepository.GetByUsername(username);
+
+            if (unique == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        private bool ValidateImage(IFormFile file)
+        {
+            if (file is null)
+            {
+                return true;
+            }
+
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+            var fileExtension = System.IO.Path.GetExtension(file.FileName).ToLowerInvariant();
+
+            return allowedExtensions.Contains(fileExtension);
         }
     }
 }

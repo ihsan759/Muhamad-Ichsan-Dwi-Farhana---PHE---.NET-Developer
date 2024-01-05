@@ -8,14 +8,9 @@ namespace Register_Supply_Management.Repositories.Data
     {
         public AccountRepository(RegisterDBContext registerDbContext) : base(registerDbContext) { }
 
-        public bool IsDuplicateValue(string value)
+        public Account? GetByUsername(string Username)
         {
-            return _registerDbContext.Set<Account>().Any(ac => ac.PhoneNumber == value || ac.Email == value);
-        }
-
-        public Account? GetByEmail(string Email)
-        {
-            return _registerDbContext.Set<Account>().FirstOrDefault(ac => ac.Email == Email);
+            return _registerDbContext.Set<Account>().FirstOrDefault(ac => ac.Username == Username);
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Register_Supply_Management.Dtos.Account;
-using Register_Supply_Management.Model.Data;
 using Register_Supply_Management.Services;
-using Register_Supply_Management.Utilities.Enum;
 using Register_Supply_Management.Utilities.Handlers;
 using System.Net;
 
@@ -33,7 +31,7 @@ namespace Register_Supply_Management.Controllers
                     Message = "Register Failed"
                 });
             }
-            return Ok(new ResponseHandlers<Account>
+            return Ok(new ResponseHandlers<NewAccountDto>
             {
                 Code = StatusCodes.Status200OK,
                 Status = HttpStatusCode.OK.ToString(),
@@ -128,12 +126,12 @@ namespace Register_Supply_Management.Controllers
 
         [HttpPut("Update")]
         [Authorize]
-        public async Task<IActionResult> Update([FromForm] UpdateAccountDto updateAccountDto)
+        public IActionResult Update(UpdateAccountDto updateAccountDto)
         {
             var userIdClaim = User.FindFirst("Id");
             if (userIdClaim != null && int.TryParse(userIdClaim.Value, out int userId))
             {
-                var updateResult = await _accountSevices.Update(updateAccountDto, userId);
+                var updateResult = _accountSevices.Update(updateAccountDto, userId);
                 if (updateResult == 2)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, new ResponseHandlers<string>
@@ -172,87 +170,6 @@ namespace Register_Supply_Management.Controllers
                 });
             }
 
-        }
-
-
-        [HttpPost("Approval")]
-        [Authorize(Roles = $"{nameof(RoleLevel.Admin)}")]
-        public IActionResult Approval(int Id)
-        {
-            var approvalResult = _accountSevices.Approval(Id);
-            if (approvalResult == 2)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseHandlers<string>
-                {
-                    Code = StatusCodes.Status500InternalServerError,
-                    Status = HttpStatusCode.InternalServerError.ToString(),
-                    Message = "Error retrieving data from the database"
-                });
-            }
-            else if (approvalResult == 1)
-            {
-                return Ok(new ResponseHandlers<string>
-                {
-                    Code = StatusCodes.Status200OK,
-                    Status = HttpStatusCode.OK.ToString(),
-                    Message = "Approve Successfully"
-                });
-            }
-            else
-            {
-                return NotFound(new ResponseHandlers<string>
-                {
-                    Code = StatusCodes.Status404NotFound,
-                    Status = HttpStatusCode.NotFound.ToString(),
-                    Message = "Data not Found"
-                });
-            }
-        }
-
-        [HttpGet("User")]
-        [Authorize(Roles = $"{nameof(RoleLevel.Admin)}")]
-        public IActionResult GetAccountUser()
-        {
-            var userResult = _accountSevices.GetAccountUser();
-            if (userResult == null)
-            {
-                return NotFound(new ResponseHandlers<AccountDto>
-                {
-                    Code = StatusCodes.Status404NotFound,
-                    Status = HttpStatusCode.NotFound.ToString(),
-                    Message = "Data Not Found"
-                });
-            }
-            return Ok(new ResponseHandlers<IEnumerable<AccountDto>>
-            {
-                Code = StatusCodes.Status200OK,
-                Status = HttpStatusCode.OK.ToString(),
-                Message = "Data Found",
-                Data = userResult
-            });
-        }
-
-        [HttpGet("Vendor")]
-        [Authorize(Roles = $"{nameof(RoleLevel.Admin)}, {nameof(RoleLevel.Manager)}")]
-        public IActionResult GetAccountVendor()
-        {
-            var vendorResult = _accountSevices.GetAccountVendor();
-            if (vendorResult == null)
-            {
-                return NotFound(new ResponseHandlers<AccountDto>
-                {
-                    Code = StatusCodes.Status404NotFound,
-                    Status = HttpStatusCode.NotFound.ToString(),
-                    Message = "Data Not Found"
-                });
-            }
-            return Ok(new ResponseHandlers<IEnumerable<AccountDto>>
-            {
-                Code = StatusCodes.Status200OK,
-                Status = HttpStatusCode.OK.ToString(),
-                Message = "Data Found",
-                Data = vendorResult
-            });
         }
 
         [HttpGet("Get")]

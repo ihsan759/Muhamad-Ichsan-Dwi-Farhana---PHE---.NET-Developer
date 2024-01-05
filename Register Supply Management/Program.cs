@@ -26,10 +26,12 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IVendorRepository, VendorRepository>();
+builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
 //Add Services
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<VendorService>();
+builder.Services.AddScoped<ProjectService>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

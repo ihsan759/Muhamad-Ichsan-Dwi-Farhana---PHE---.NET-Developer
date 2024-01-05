@@ -14,16 +14,18 @@ namespace Register_Supply_Management.Services
         private readonly IRoleRepository _roleRepository;
         private readonly RegisterDBContext _registerDBContext;
         private readonly ITokenHandler _tokenHandler;
+        private readonly IVendorRepository _vendorRepository;
 
-        public AccountService(IAccountRepository accountRepository, IRoleRepository roleRepository, RegisterDBContext registerDBContext, ITokenHandler tokenHandler)
+        public AccountService(IAccountRepository accountRepository, IRoleRepository roleRepository, RegisterDBContext registerDBContext, ITokenHandler tokenHandler, IVendorRepository vendorRepository)
         {
             _accountRepository = accountRepository;
             _roleRepository = roleRepository;
             _registerDBContext = registerDBContext;
             _tokenHandler = tokenHandler;
+            _vendorRepository = vendorRepository;
         }
 
-        public async Task<Account?> Register(RegisterDto registerDto)
+        public async Task<NewAccountDto?> Register(RegisterDto registerDto)
         {
             using var transactions = _registerDBContext.Database.BeginTransaction();
             try
@@ -47,18 +49,40 @@ namespace Register_Supply_Management.Services
                 var account = new Account
                 {
                     Name = registerDto.Name,
-                    Email = registerDto.Email,
+                    Username = registerDto.Username,
                     Password = Hashing.HashPassword(registerDto.Password),
                     RoleId = 3,
-                    Image = fileData,
-                    PhoneNumber = registerDto.PhoneNumber,
                     CreatedAt = DateTime.Now,
                     ModifiedAt = DateTime.Now,
                 };
 
                 var newAccount = _accountRepository.Create(account);
+
+                var vendor = new Vendor
+                {
+                    Name = registerDto.NameVendor,
+                    Email = registerDto.Email,
+                    Image = fileData,
+                    PhoneNumber = registerDto.PhoneNumber,
+                    Approval = false,
+                    AccountId = newAccount.Id,
+                    CreatedAt = DateTime.Now,
+                    ModifiedAt = DateTime.Now,
+                };
+
+                var newVendor = _vendorRepository.Create(vendor);
+
+                var dto = new NewAccountDto
+                {
+                    Email = newVendor.Email,
+                    Name = newAccount.Name,
+                    NameVendor = newVendor.Name,
+                    PhoneNumber = newVendor.PhoneNumber,
+                    Username = newAccount.Username,
+                    RoleId = newAccount.RoleId
+                };
                 transactions.Commit();
-                return newAccount;
+                return dto;
             }
             catch (Exception ex)
             {
@@ -67,9 +91,11 @@ namespace Register_Supply_Management.Services
             }
         }
 
+
+
         public string Login(LoginDto loginDto)
         {
-            var getAccount = _accountRepository.GetByEmail(loginDto.Email);
+            var getAccount = _accountRepository.GetByUsername(loginDto.Username);
             if (getAccount == null) return "0";
 
             if (!Hashing.ValidatePassword(loginDto.Password, getAccount!.Password)) return "0";
@@ -83,7 +109,7 @@ namespace Register_Supply_Management.Services
                 var claims = new List<Claim>
                 {
                     new Claim("Id", getAccount.Id.ToString()),
-                    new Claim("Email", getAccount.Email),
+                    new Claim("Username", getAccount.Username),
                     new Claim(ClaimTypes.Name, getAccount.Name),
                     new Claim(ClaimTypes.Role, getRoleName.Name)
                 };
@@ -99,27 +125,7 @@ namespace Register_Supply_Management.Services
 
         }
 
-        public int Approval(int id)
-        {
-            var getAccount = _accountRepository.GetById(id);
-            if (getAccount == null) return 0;
-
-            try
-            {
-                getAccount.RoleId = 4;
-                getAccount.ModifiedAt = DateTime.Now;
-
-                _accountRepository.Update(getAccount);
-
-                return 1;
-            }
-            catch
-            {
-                return 2;
-            }
-        }
-
-        public async Task<int> Update(UpdateAccountDto updateAccountDto, int userId)
+        public int Update(UpdateAccountDto updateAccountDto, int userId)
         {
 
             var getAccount = _accountRepository.GetById(userId);
@@ -129,10 +135,6 @@ namespace Register_Supply_Management.Services
             var transaction = _registerDBContext.Database.BeginTransaction();
             try
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
-
-                string fileData = null;
-
                 string password = null;
 
                 if (updateAccountDto.Password != null)
@@ -140,40 +142,13 @@ namespace Register_Supply_Management.Services
                     Hashing.HashPassword(updateAccountDto.Password);
                 }
 
-                if (!Directory.Exists(filePath))
-                {
-                    Directory.CreateDirectory(filePath);
-                }
-                if (updateAccountDto.Image != null && updateAccountDto.Image.Length != 0)
-                {
-                    if (getAccount.Image != null)
-                    {
-                        var oldImage = Path.Combine(filePath, getAccount.Image);
-                        if (File.Exists(oldImage))
-                        {
-                            File.Delete(oldImage);
-                        }
-                    }
-                    var extension = "." + updateAccountDto.Image.FileName.Split('.')[updateAccountDto.Image.FileName.Split('.').Length - 1];
-                    fileData = DateTime.Now.Ticks.ToString() + extension;
-
-                    var newPhoto = Path.Combine(filePath, fileData);
-                    using (var stream = new FileStream(newPhoto, FileMode.Create))
-                    {
-                        await updateAccountDto.Image.CopyToAsync(stream);
-                    }
-                }
-
                 var account = new Account
                 {
                     Id = getAccount.Id,
-                    Email = updateAccountDto.Email ?? getAccount.Email,
+                    Username = updateAccountDto.Username ?? getAccount.Username,
                     Name = updateAccountDto.Name ?? getAccount.Name,
                     Password = password ?? getAccount.Password,
-                    Image = fileData ?? getAccount.Image,
                     RoleId = getAccount.RoleId,
-                    PhoneNumber = updateAccountDto.PhoneNumber ?? getAccount.PhoneNumber,
-                    VendorId = getAccount.VendorId,
                     CreatedAt = getAccount.CreatedAt,
                     ModifiedAt = DateTime.Now,
                     IsDeleted = getAccount.IsDeleted
@@ -210,48 +185,14 @@ namespace Register_Supply_Management.Services
             }
         }
 
-        public IEnumerable<AccountDto>? GetAccountUser()
-        {
-            var getAccount = _accountRepository.GetAll().Where(ac => ac.RoleId == 3);
-            if (!getAccount.Any()) return null;
-            var dto = getAccount
-                    .Select(ac => new AccountDto
-                    {
-                        Email = ac.Email,
-                        Name = ac.Name,
-                        PhoneNumber = ac.PhoneNumber,
-                        RoleId = ac.RoleId
-                    }).ToList();
-
-            return dto;
-        }
-
-        public IEnumerable<AccountDto>? GetAccountVendor()
-        {
-            var getAccount = _accountRepository.GetAll().Where(ac => ac.RoleId == 4);
-            if (!getAccount.Any()) return null;
-            var dto = getAccount
-                    .Select(ac => new AccountDto
-                    {
-                        Email = ac.Email,
-                        Name = ac.Name,
-                        PhoneNumber = ac.PhoneNumber,
-                        RoleId = ac.RoleId
-                    }).ToList();
-
-            return dto;
-        }
-
         public AccountDto? Get(int id)
         {
             var getAccount = _accountRepository.GetById(id);
             if (getAccount == null) return null;
             var dto = new AccountDto
             {
-                Email = getAccount.Email,
+                Username = getAccount.Username,
                 Name = getAccount.Name,
-                PhoneNumber = getAccount.PhoneNumber,
-                RoleId = getAccount.RoleId
             };
 
             return dto;

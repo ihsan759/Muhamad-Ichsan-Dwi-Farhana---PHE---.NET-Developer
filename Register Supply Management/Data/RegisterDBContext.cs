@@ -11,6 +11,7 @@ namespace Register_Supply_Management.Data
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<Project> Projects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,20 +21,24 @@ namespace Register_Supply_Management.Data
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = "Admin", CreatedAt = DateTime.Now, ModifiedAt = DateTime.Now },
                 new Role { Id = 2, Name = "Manager", CreatedAt = DateTime.Now, ModifiedAt = DateTime.Now },
-                new Role { Id = 3, Name = "User", CreatedAt = DateTime.Now, ModifiedAt = DateTime.Now },
-                new Role { Id = 4, Name = "Vendor", CreatedAt = DateTime.Now, ModifiedAt = DateTime.Now }
+                new Role { Id = 3, Name = "Vendor", CreatedAt = DateTime.Now, ModifiedAt = DateTime.Now }
                 );
 
             modelBuilder.Entity<Account>().HasData(
-                new Account { Id = 1, Name = "Admin", PhoneNumber = "0823131333", Email = "Admin@gmail.com", Password = Hashing.HashPassword("Admin"), RoleId = 1, IsDeleted = false, CreatedAt = DateTime.Now, ModifiedAt = DateTime.Now },
-                new Account { Id = 2, Name = "Manager", PhoneNumber = "082317777", Email = "Manager@gmail.com", Password = Hashing.HashPassword("Manager"), RoleId = 2, IsDeleted = false, CreatedAt = DateTime.Now, ModifiedAt = DateTime.Now }
+                new Account { Id = 1, Name = "Admin", Username = "Admin", Password = Hashing.HashPassword("Admin"), RoleId = 1, IsDeleted = false, CreatedAt = DateTime.Now, ModifiedAt = DateTime.Now },
+                new Account { Id = 2, Name = "Manager", Username = "Manager", Password = Hashing.HashPassword("Manager"), RoleId = 2, IsDeleted = false, CreatedAt = DateTime.Now, ModifiedAt = DateTime.Now }
                 );
 
             // Set Unique
+            modelBuilder.Entity<Vendor>().HasIndex(ve => new
+            {
+                ve.Email,
+                ve.PhoneNumber
+            }).IsUnique();
+
             modelBuilder.Entity<Account>().HasIndex(acc => new
             {
-                acc.Email,
-                acc.PhoneNumber
+                acc.Username
             }).IsUnique();
 
             // Set Relationship
@@ -45,11 +50,18 @@ namespace Register_Supply_Management.Data
                 .HasForeignKey(acc => acc.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Vendor - Account (One to Many)
+            // Vendor - Account (One to One)
             modelBuilder.Entity<Account>()
                 .HasOne(acc => acc.Vendor)
-                .WithMany(vendor => vendor.Accounts)
-                .HasForeignKey(acc => acc.VendorId)
+                .WithOne(vendor => vendor.Account)
+                .HasForeignKey<Vendor>(ve => ve.AccountId)
+                .IsRequired(false);
+
+            // Vendor - Project (One to Many)
+            modelBuilder.Entity<Project>()
+                .HasOne(pro => pro.Vendor)
+                .WithMany(ve => ve.Projects)
+                .HasForeignKey(pro => pro.VendorId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
